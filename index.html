@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cleva Dental Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0E2A47;
+    --blue: #1A5C96;
+    --blue-mid: #2E7BC4;
+    --blue-light: #D6E8F7;
+    --blue-pale: #EEF5FC;
+    --teal: #1B8C6E;
+    --teal-light: #D4F0E8;
+    --off-white: #F7F6F3;
+    --warm-gray: #E8E6E0;
+    --text-dark: #0E1A26;
+    --text-mid: #4A5568;
+    --text-light: #8A9BB0;
+    --white: #FFFFFF;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    background: var(--white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 72px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(14,42,71,0.08);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 2px 24px rgba(14,42,71,0.08); }
+
+  .contact-right{
+    padding: 40px;
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.01em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--blue-mid); }
+
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px; font-weight: 400; letter-spacing: 0.04em;
+    color: var(--text-mid); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+
+  .nav-cta {
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 13px; font-weight: 500;
+    padding: 10px 24px;
+    border: none; border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 4px; background: none; border: none;
+  }
+  .hamburger span {
+    display: block; width: 22px; height: 1.5px;
+    background: var(--navy); transition: all 0.3s;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    z-index: 0;
+  }
+  .hero-video {
+    width: 100%; 
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+  }
+  .hero-img-main {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+  }
+  /* dark gradient overlay */
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 24, 40, 0.25) 0%,
+      rgba(10, 24, 40, 0.15) 40%,
+      rgba(10, 24, 40, 0.72) 100%
+    );
+    z-index: 1;
+  }
+
+  .hero-left {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    padding: 0 6% 80px;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.75); text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 32px; height: 1px; background: rgba(255,255,255,0.55);
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 8vw, 108px);
+    font-weight: 300;
+    line-height: 1.0;
+    color: var(--white);
+    margin-bottom: 24px;
+    max-width: 780px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: #7DC4F5;
+  }
+
+  .hero-bottom-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .hero-sub {
+    font-size: 15px; font-weight: 300; line-height: 1.7;
+    color: rgba(255,255,255,0.72);
+    max-width: 420px;
+    margin: 0;
+  }
+
+  .hero-actions-stats {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 28px;
+    flex-shrink: 0;
+  }
+
+  .hero-actions {
+    display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .btn-primary {
+    background: var(--white);
+    color: var(--navy);
+    font-size: 13px; font-weight: 500;
+    padding: 14px 32px;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); }
+
+  .btn-ghost {
+    color: rgba(255,255,255,0.85);
+    font-size: 13px; font-weight: 400;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--white); border-color: var(--white); }
+
+  .hero-stats {
+    display: flex; gap: 32px;
+  }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 32px; font-weight: 300;
+    color: var(--white); line-height: 1;
+    margin-bottom: 3px;
+  }
+  .hero-stat-label {
+    font-size: 10px; color: rgba(255,255,255,0.5); font-weight: 400; letter-spacing: 0.03em;
+  }
+
+  /* floating badge — bottom-left */
+  .hero-card-float {
+    position: absolute;
+    bottom: 48px; left: 6%;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 16px;
+    padding: 16px 22px;
+    min-width: 200px;
+    z-index: 3;
+    animation: floatUp 0.8s ease 0.6s both;
+  }
+  @keyframes floatUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-card-icon { font-size: 18px; margin-bottom: 6px; }
+  .hero-card-title {
+    font-size: 13px; font-weight: 500; color: var(--white); margin-bottom: 2px;
+  }
+  .hero-card-sub { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+  /* ─── SECTION COMMON ─── */
+  section { padding: 100px 5%; }
+
+  .section-tag {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--blue-mid);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-tag::before { content: ''; width: 24px; height: 1px; background: var(--blue-mid); }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4.5vw, 60px);
+    font-weight: 300; line-height: 1.1;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+  .section-title em { font-style: italic; color: var(--blue-mid); }
+
+  .section-sub {
+    font-size: 15px; font-weight: 300; line-height: 1.7;
+    color: var(--text-mid); max-width: 540px;
+  }
+
+  /* ─── ABOUT / NUMBERS ─── */
+  .about-section {
+    background: var(--navy);
+    color: var(--white);
+    padding: 100px 5%;
+  }
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img {
+    width: 100%; aspect-ratio: 4/5;
+    object-fit: cover; border-radius: 8px;
+    display: block;
+  }
+  .about-img-accent {
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 120px; height: 120px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    pointer-events: none;
+  }
+
+  .about-content .section-tag { color: var(--blue-light); }
+  .about-content .section-tag::before { background: var(--blue-light); }
+  .about-content .section-title { color: var(--white); }
+  .about-content .section-sub { color: rgba(255,255,255,0.65); margin-bottom: 48px; }
+
+  .about-nums {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .about-num-item {
+    padding: 28px 24px;
+    background: rgba(255,255,255,0.04);
+  }
+  .about-num-val {
+    font-family: var(--font-display);
+    font-size: 44px; font-weight: 300;
+    color: var(--white); line-height: 1;
+    margin-bottom: 6px;
+  }
+  .about-num-val sup { font-size: 22px; vertical-align: super; }
+  .about-num-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+  /* ─── SERVICES ─── */
+  .services-section { background: var(--off-white); }
+  .services-header {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; align-items: end;
+    margin-bottom: 60px;
+  }
+  .services-header .btn-ghost { color: var(--navy); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .service-card {
+    background: var(--white);
+    padding: 36px 32px;
+    cursor: pointer;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card:hover { background: var(--navy); }
+  .service-card:hover .service-num { color: rgba(255,255,255,0.2); }
+  .service-card:hover .service-name { color: var(--white); }
+  .service-card:hover .service-desc { color: rgba(255,255,255,0.6); }
+  .service-card:hover .service-arrow { color: var(--white); border-color: rgba(255,255,255,0.3); }
+
+  .service-num {
+    font-family: var(--font-display);
+    font-size: 13px; color: var(--warm-gray);
+    margin-bottom: 40px;
+    transition: color 0.25s;
+  }
+  .service-name {
+    font-family: var(--font-display);
+    font-size: 24px; font-weight: 400; line-height: 1.2;
+    color: var(--navy); margin-bottom: 12px;
+    transition: color 0.25s;
+  }
+  .service-desc {
+    font-size: 13px; line-height: 1.6;
+    color: var(--text-mid); margin-bottom: 32px;
+    transition: color 0.25s;
+  }
+  .service-arrow {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px;
+    border: 1px solid var(--warm-gray);
+    border-radius: 50%;
+    color: var(--navy);
+    font-size: 14px;
+    transition: color 0.25s, border-color 0.25s, transform 0.2s;
+  }
+  .service-card:hover .service-arrow { transform: translate(2px, -2px); }
+
+  /* ─── HOW IT WORKS ─── */
+  .how-section {
+    background: var(--white);
+  }
+  .how-header { margin-bottom: 60px; }
+  .how-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--warm-gray);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .how-step {
+    padding: 44px 32px;
+    border-right: 1px solid var(--warm-gray);
+    position: relative;
+  }
+  .how-step:last-child { border-right: none; }
+  .how-step-num {
+    font-family: var(--font-display);
+    font-size: 48px; font-weight: 300;
+    color: var(--blue-pale); line-height: 1;
+    margin-bottom: 20px;
+  }
+  .how-step-title {
+    font-size: 15px; font-weight: 500;
+    color: var(--navy); margin-bottom: 10px;
+  }
+  .how-step-desc {
+    font-size: 13px; line-height: 1.6; color: var(--text-mid);
+  }
+  .how-step-connector {
+    position: absolute; top: 44px; right: -12px;
+    width: 24px; height: 24px;
+    background: var(--white);
+    border: 1px solid var(--warm-gray);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--text-light);
+    z-index: 1;
+  }
+  .how-step:last-child .how-step-connector { display: none; }
+
+  /* ─── CASES / BEFORE-AFTER ─── */
+  .cases-section { background: var(--off-white); }
+  .cases-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 48px; flex-wrap: wrap; gap: 20px;
+  }
+  .cases-filter {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .filter-btn {
+    font-size: 12px; font-weight: 400;
+    padding: 8px 20px;
+    border-radius: 100px;
+    border: 1px solid var(--warm-gray);
+    background: var(--white);
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--navy); color: var(--white); border-color: var(--navy);
+  }
+
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .case-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .case-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(14,42,71,0.1); }
+
+  .case-imgs {
+    display: grid; grid-template-columns: 1fr 1fr;
+    position: relative; height: 240px;
+  }
+  .case-img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+  .case-divider {
+    position: absolute; left: 50%; top: 0; bottom: 0;
+    width: 1px; background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    transform: translateX(-50%);
+  }
+  .case-divider-pill {
+    background: var(--white);
+    padding: 4px 10px; border-radius: 20px;
+    font-size: 9px; font-weight: 500; letter-spacing: 0.06em;
+    color: var(--navy);
+  }
+  .case-body { padding: 20px 24px; }
+  .case-tag {
+    display: inline-block;
+    font-size: 10px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue-mid);
+    background: var(--blue-pale);
+    padding: 3px 10px; border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .case-title {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 400; line-height: 1.3;
+    color: var(--navy); margin-bottom: 6px;
+  }
+  .case-meta { font-size: 12px; color: var(--text-light); }
+
+  /* ─── TEAM ─── */
+  .team-section { background: var(--white); }
+  .team-header {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 40px; align-items: end;
+    margin-bottom: 60px;
+  }
+  .team-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .doctor-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .doctor-card:hover { transform: translateY(-4px); }
+  .doctor-photo-wrap {
+    aspect-ratio: 3/4;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    background: var(--blue-pale);
+    position: relative;
+  }
+  .doctor-photo {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: top;
+    display: block;
+    transition: transform 0.4s;
+  }
+  .doctor-card:hover .doctor-photo { transform: scale(1.04); }
+  .doctor-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(14,42,71,0.6) 0%, transparent 60%);
+    opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: flex-end;
+    padding: 20px;
+  }
+  .doctor-card:hover .doctor-overlay { opacity: 1; }
+  .doctor-overlay-btn {
+    font-size: 11px; color: var(--white); font-weight: 400;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    padding-bottom: 2px;
+  }
+  .doctor-name {
+    font-family: var(--font-display);
+    font-size: 18px; font-weight: 400;
+    color: var(--navy); margin-bottom: 3px;
+  }
+  .doctor-role { font-size: 12px; color: var(--text-light); }
+  .doctor-exp { font-size: 11px; color: var(--blue-mid); margin-top: 4px; }
+
+  /* ─── REVIEWS ─── */
+  .reviews-section {
+    background: var(--navy);
+    color: var(--white);
+  }
+  .reviews-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 48px; flex-wrap: wrap; gap: 20px;
+  }
+  .reviews-header .section-title { color: var(--white); margin-bottom: 0; }
+  .reviews-rating {
+    text-align: right;
+  }
+  .rating-num {
+    font-family: var(--font-display);
+    font-size: 48px; font-weight: 300; color: var(--white);
+    line-height: 1; margin-bottom: 4px;
+  }
+  .rating-stars { color: #F5C842; font-size: 14px; letter-spacing: 2px; }
+  .rating-count { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .review-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 28px;
+  }
+  .review-quote {
+    font-family: var(--font-display);
+    font-size: 38px; color: var(--blue-mid);
+    line-height: 1; margin-bottom: 12px;
+  }
+  .review-text {
+    font-size: 14px; line-height: 1.7;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 24px;
+    font-style: italic;
+    font-family: var(--font-display);
+  }
+  .review-author {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .review-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--blue-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500; color: var(--white);
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .review-avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .review-name { font-size: 13px; font-weight: 500; color: var(--white); }
+  .review-service { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+
+  /* ─── BLOG ─── */
+  .blog-section { background: var(--off-white); }
+  .blog-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 48px; flex-wrap: wrap; gap: 20px;
+  }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 20px;
+  }
+  .blog-card {
+    background: var(--white);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.25s;
+  }
+  .blog-card:hover { transform: translateY(-3px); }
+  .blog-card-img {
+    width: 100%; aspect-ratio: 16/9;
+    object-fit: cover; display: block;
+  }
+  .blog-card.featured .blog-card-img { aspect-ratio: 16/10; }
+  .blog-card-body { padding: 24px; }
+  .blog-tag {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--teal); background: var(--teal-light);
+    padding: 3px 10px; border-radius: 20px;
+    display: inline-block; margin-bottom: 12px;
+  }
+  .blog-card-title {
+    font-family: var(--font-display);
+    font-size: 20px; font-weight: 400; line-height: 1.3;
+    color: var(--navy); margin-bottom: 8px;
+  }
+  .blog-card.small .blog-card-title { font-size: 16px; }
+  .blog-card-excerpt {
+    font-size: 13px; color: var(--text-mid); line-height: 1.6;
+    margin-bottom: 16px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .blog-card.small .blog-card-excerpt { display: none; }
+  .blog-meta { font-size: 11px; color: var(--text-light); }
+
+  /* ─── CTA BAND ─── */
+  .cta-section {
+    background: var(--blue-pale);
+    padding: 100px 5%;
+    text-align: center;
+  }
+  .cta-inner { max-width: 640px; margin: 0 auto; }
+  .cta-section .section-tag { justify-content: center; }
+  .cta-section .section-tag::before { display: none; }
+  .cta-section .section-title { margin: 0 auto 16px; max-width: 500px; }
+  .cta-section .section-sub { margin: 0 auto 44px; text-align: center; }
+  .cta-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* ─── CONTACT ─── */
+  .contact-section {
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 600px;
+  }
+  .contact-left {
+    background: var(--navy);
+    padding: 80px 5%;
+    color: var(--white);
+  }
+  .contact-left .section-tag { color: var(--blue-light); }
+  .contact-left .section-tag::before { background: var(--blue-light); }
+  .contact-left .section-title { color: var(--white); margin-bottom: 32px; }
+
+  .contact-info-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 20px;
+    margin-bottom: 48px;
+  }
+  .contact-info-item {
+    display: flex; gap: 16px; align-items: flex-start;
+  }
+  .contact-info-icon {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+  }
+  .contact-info-label { font-size: 11px; color: rgba(255,255,255,0.4); margin-bottom: 2px; }
+  .contact-info-val { font-size: 14px; color: var(--white); font-weight: 400; }
+
+  .contact-socials { display: flex; gap: 12px; }
+  .social-btn {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    text-decoration: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 14px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .social-btn:hover { background: rgba(255,255,255,0.16); color: var(--white); }
+
+  .contact-img-side {
+    position: relative;
+    overflow: hidden;
+    min-height: 500px;
+  }
+
+
+    padding: 80px 5%;
+    background: var(--off-white);
+  }
+  .contact-right .section-tag { margin-bottom: 32px; }
+
+  .form-group { margin-bottom: 20px; }
+  .form-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--text-light);
+    display: block; margin-bottom: 8px;
+  }
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 14px; font-weight: 300;
+    color: var(--text-dark);
+    background: var(--white);
+    border: 1px solid var(--warm-gray);
+    border-radius: 6px;
+    padding: 12px 16px;
+    transition: border-color 0.2s;
+    outline: none;
+    appearance: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--blue-mid);
+  }
+  .form-textarea { resize: vertical; min-height: 100px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--navy);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 14px; font-weight: 500;
+    padding: 16px;
+    border: none; border-radius: 100px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+  .form-submit:hover { background: var(--blue); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.5);
+    padding: 60px 5% 32px;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px; margin-bottom: 48px;
+  }
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 24px; font-weight: 300;
+    color: var(--white); margin-bottom: 12px;
+    display: block;
+  }
+  .footer-logo span { color: var(--blue-mid); }
+  .footer-desc { font-size: 13px; line-height: 1.7; max-width: 240px; }
+  .footer-col-title {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--white);
+    margin-bottom: 16px;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a {
+    font-size: 13px; color: rgba(255,255,255,0.5);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom {
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 12px;
+  }
+  .footer-bottom p { font-size: 12px; }
+
+  /* ─── MOBILE MENU ─── */
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 72px; left: 0; right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--warm-gray);
+    padding: 24px 5%;
+    z-index: 99;
+    flex-direction: column; gap: 20px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 15px; color: var(--text-dark);
+    text-decoration: none; font-weight: 400;
+  }
+
+  /* ─── SCROLL ANIMATION ─── */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .contact-right{
+      padding: 30px 15px;
+    }
+    .hero { min-height: 100vh; }
+    .hero-left { padding: 0 5% 60px; }
+    .hero-bottom-row { flex-direction: column; align-items: flex-start; gap: 28px; }
+    .hero-actions-stats { align-items: flex-start; }
+    .hero-actions { justify-content: flex-start; }
+    .hero-card-float { left: 5%; bottom: auto; top: 120px; }
+
+    .about-inner { grid-template-columns: 1fr; gap: 48px; }
+    .about-img { aspect-ratio: 16/9; }
+
+    .services-header { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .how-steps { grid-template-columns: repeat(2, 1fr); }
+    .how-step { border-bottom: 1px solid var(--warm-gray); }
+    .how-step:nth-child(even) { border-right: none; }
+    .how-step-connector { display: none; }
+
+    .team-grid { grid-template-columns: repeat(2, 1fr); }
+    .cases-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .blog-grid { grid-template-columns: 1fr 1fr; }
+    .blog-card.featured { grid-column: span 2; }
+
+    .contact-section { grid-template-columns: 1fr; }
+    .contact-img-side { min-height: 300px; }
+
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+  }
+
+  @media (max-width: 640px) {
+    section { padding: 64px 5%; }
+
+    .hero-left { padding: 0 5% 48px; }
+    .hero-title { font-size: clamp(44px, 12vw, 72px); }
+    .hero-stats { gap: 20px; }
+    .hero-card-float { display: none; }
+
+    .services-grid { grid-template-columns: 1fr; }
+    .how-steps { grid-template-columns: 1fr; }
+    .how-step { border-right: none; border-bottom: 1px solid var(--warm-gray); }
+    .how-step:last-child { border-bottom: none; }
+
+    .cases-grid { grid-template-columns: 1fr; }
+    .team-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+    .reviews-grid { grid-template-columns: 1fr; }
+    .reviews-header { flex-direction: column; align-items: flex-start; }
+    .reviews-rating { text-align: left; }
+
+    .blog-grid { grid-template-columns: 1fr; }
+    .blog-card.featured { grid-column: span 1; }
+
+    .form-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+
+    .cases-header { flex-direction: column; align-items: flex-start; }
+    .team-header { grid-template-columns: 1fr; }
+    .blog-header { flex-direction: column; align-items: flex-start; }
+    .hero-card-float { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Cleva <span>Dental</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Послуги</a></li>
+    <li><a href="#about">Про нас</a></li>
+    <li><a href="#cases">Результати</a></li>
+    <li><a href="#team">Лікарі</a></li>
+    <li><a href="#contact">Контакти</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Записатись</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()">Послуги</a>
+  <a href="#about" onclick="closeMobile()">Про нас</a>
+  <a href="#cases" onclick="closeMobile()">Результати</a>
+  <a href="#team" onclick="closeMobile()">Лікарі</a>
+  <a href="#contact" onclick="closeMobile()">Контакти</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <!-- background image -->
+  <div class="hero-bg">
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="https://res.cloudinary.com/dsleguyqt/video/upload/q_auto/f_auto/v1777379536/Hero_section_igh74r.mp4"
+        type="video/mp4">
+    </video>
+  </div>
+  <!-- overlay -->
+  <div class="hero-overlay"></div>
+
+  <!-- content -->
+  <div class="hero-left">
+    <p class="hero-eyebrow" data-aos="fade-down" data-aos-duration="1500">Авторська стоматологія</p>
+    <h1 class="hero-title" data-aos="fade-down" data-aos-duration="1000">
+      Посмішка,<br>яку хочеться<br><em>показувати</em>
+    </h1>
+    <div class="hero-bottom-row">
+      <p class="hero-sub" data-aos="fade-down" data-aos-duration="1500">Cleva — студія, де медицина зустрічається з мистецтвом. Індивідуальний підхід, технології останнього покоління і результат, який виглядає природно.</p>
+      <div class="hero-actions-stats">
+        <div class="hero-stats">
+        </div>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-primary">Записатись на консультацію →</a>
+          <a href="#cases" class="btn-ghost">Переглянути результати</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services" data-aos="fade-up">
+  <div class="services-header">
+    <div>
+      <p class="section-tag">Послуги</p>
+      <h2 class="section-title">Що ми<em> робимо</em></h2>
+    </div>
+    <div>
+      <p class="section-sub">Повний спектр стоматологічних послуг — від профілактики до складних реставрацій.</p>
+    </div>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="service-name">Естетика<br>посмішки</div>
+      <div class="service-desc">Вініри, відбілювання, реставрація. Результат, що виглядає природно і відчувається як ваш власний.</div>
+      <div class="service-arrow">↗</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="service-name">Ортодонтія</div>
+      <div class="service-desc">Прозорі елайнери і брекети нового покоління. Рівні зуби без компромісів зі стилем.</div>
+      <div class="service-arrow">↗</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="service-name">Імплантація</div>
+      <div class="service-desc">Повне відновлення зуба під корінь. Імпланти швейцарської якості, що слугують десятиліттями.</div>
+      <div class="service-arrow">↗</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="service-name">Профілактика</div>
+      <div class="service-desc">Гігієна, Air Flow, огляд. Двічі на рік — і зуби скажуть дякую через 20 років.</div>
+      <div class="service-arrow">↗</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="service-name">Хірургія</div>
+      <div class="service-desc">Видалення зубів, синус-ліфтинг, кісткова пластика — у комфортних умовах під седацією.</div>
+      <div class="service-arrow">↗</div>
+    </div>
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="service-name">Дитяча<br>стоматологія</div>
+      <div class="service-desc">Лагідний підхід до маленьких пацієнтів. Формуємо правильне ставлення до стоматолога змалку.</div>
+      <div class="service-arrow">↗</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-img-wrap reveal">
+      <img class="about-img"
+        src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623947/%D0%BA%D0%B0%D0%B1%D1%96%D0%BD%D0%B5%D1%82_wdtbbw.jpg"
+        alt="Cleva Dental — інтер'єр клініки">
+      <div class="about-img-accent"></div>
+    </div>
+    <div class="about-content">
+      <p class="section-tag">Про нас</p>
+      <h2 class="section-title">Більше, ніж<br>стоматологія</h2>
+      <p class="section-sub">Ми не просто лікуємо зуби — ми проектуємо посмішки. Cleva Dental Studio — це місце, де кожен пацієнт отримує власний маршрут: від діагностики до довгострокового результату.</p>
+      <div class="about-nums reveal reveal-delay-1">
+        <div class="about-num-item">
+          <div class="about-num-val">8<sup>+</sup></div>
+          <div class="about-num-desc">Років на ринку<br>естетичної стоматології</div>
+        </div>
+        <div class="about-num-item">
+          <div class="about-num-val">12</div>
+          <div class="about-num-desc">Лікарів різних<br>спеціалізацій</div>
+        </div>
+        <div class="about-num-item">
+          <div class="about-num-val">4к<sup>+</sup></div>
+          <div class="about-num-desc">Задоволених<br>пацієнтів</div>
+        </div>
+        <div class="about-num-item">
+          <div class="about-num-val">97<sup>%</sup></div>
+          <div class="about-num-desc">Позитивних<br>відгуків</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="how-header">
+    <p class="section-tag">Як це працює</p>
+    <h2 class="section-title reveal">Від дзвінка<br>до <em>результату</em></h2>
+  </div>
+  <div class="how-steps reveal">
+    <div class="how-step">
+      <div class="how-step-num">01</div>
+      <div class="how-step-title">Онлайн-запис</div>
+      <div class="how-step-desc">Оберіть зручний час через форму або зателефонуйте. Підтвердження — за 15 хвилин.</div>
+      <div class="how-step-connector">›</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">02</div>
+      <div class="how-step-title">Діагностика</div>
+      <div class="how-step-desc">Цифровий знімок і 3D-скан. Повна картина стану ротової порожнини за одне відвідування.</div>
+      <div class="how-step-connector">›</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">03</div>
+      <div class="how-step-title">Індивідуальний план</div>
+      <div class="how-step-desc">Лікар пояснює кожен крок, показує результат в 3D і узгоджує терміни та бюджет.</div>
+      <div class="how-step-connector">›</div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">04</div>
+      <div class="how-step-title">Лікування та підтримка</div>
+      <div class="how-step-desc">Комфортне лікування і безкоштовні консультації після — ми на зв'язку між сесіями.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="cases-section" id="cases">
+  <div class="cases-header">
+    <div>
+      <p class="section-tag">Результати</p>
+      <h2 class="section-title" style="margin-bottom:0;">До / <em>після</em></h2>
+    </div>
+    <div class="cases-filter">
+      <button class="filter-btn active">Всі</button>
+      <button class="filter-btn">Вініри</button>
+      <button class="filter-btn">Ортодонтія</button>
+      <button class="filter-btn">Імпланти</button>
+      <button class="filter-btn">Відбілювання</button>
+    </div>
+  </div>
+  <div class="cases-grid reveal">
+    <div class="case-card">
+      <div class="case-imgs">
+        <img class="case-img" src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623945/%D0%B4%D0%BE_1_qylbwg.jpg" alt="до">
+        <img class="case-img" src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623947/%D0%BF%D1%96%D1%81%D0%BB%D1%8F_1_bjfv8d.jpg" alt="після">
+        <div class="case-divider"><div class="case-divider-pill">ДО · ПІСЛЯ</div></div>
+      </div>
+      <div class="case-body">
+        <span class="case-tag">Вініри</span>
+        <div class="case-title">Комплексна естетична реставрація</div>
+        <div class="case-meta">12 порцелянових вінірів · 3 тижні</div>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-imgs">
+        <img class="case-img" src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623946/%D0%B4%D0%BE_%D0%B5%D0%BB%D0%B0%D0%B8%CC%86%D0%BD%D0%B5%D1%80%D0%B8_ps8k1l.jpg" alt="до">
+        <img class="case-img" src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623946/%D0%BF%D1%96%D1%81%D0%BB%D1%8F_%D0%B5%D0%BB%D0%B0%D0%B8%CC%86%D0%BD%D0%B5%D1%80%D0%B8_jybavg.jpg" alt="після">
+        <div class="case-divider"><div class="case-divider-pill">ДО · ПІСЛЯ</div></div>
+      </div>
+      <div class="case-body">
+        <span class="case-tag">Ортодонтія</span>
+        <div class="case-title">Вирівнювання прикусу елайнерами</div>
+        <div class="case-meta">Clear aligners · 8 місяців</div>
+      </div>
+    </div>
+    <div class="case-card">
+      <div class="case-imgs">
+        <img class="case-img" src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623947/%D0%B4%D0%BE_%D1%80%D0%B5%D1%81%D1%82%D0%B0%D0%B2%D1%80%D0%B0%D1%86%D1%96%D1%8F_x88c5s.jpg" alt="до">
+        <img class="case-img" src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623947/%D0%BF%D1%96%D1%81%D0%BB%D1%8F_%D1%80%D0%B5%D1%81%D1%82%D0%B0%D0%B2%D1%80_jclykp.jpg" alt="після">
+        <div class="case-divider"><div class="case-divider-pill">ДО · ПІСЛЯ</div></div>
+      </div>
+      <div class="case-body">
+        <span class="case-tag">Імпланти</span>
+        <div class="case-title">Відновлення відсутніх зубів</div>
+        <div class="case-meta">Straumann імпланти · 4 місяці</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="section-tag">Перший крок</p>
+    <h2 class="section-title reveal">Твоя посмішка —<br>наш <em>підпис</em></h2>
+    <p class="section-sub reveal">Запишіться на безкоштовну консультацію.</p>
+    <div class="cta-actions reveal">
+      <a href="#contact" class="btn-primary">Записатись безкоштовно →</a>
+    </div>
+    <div class="cta-actions reveal">
+      <a href="tel:+380501234567" class="btn-ghost">+38 050 123 45 67</a>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section" id="team">
+  <div class="team-header">
+    <div>
+      <p class="section-tag">Команда</p>
+      <h2 class="section-title" style="margin-bottom:0;">Ми працюємо,<em> щоб ви усміхались впевнено.</em></h2>
+    </div>
+  </div>
+  <div class="team-grid reveal">
+    <div class="doctor-card">
+      <div class="doctor-photo-wrap">
+        <img class="doctor-photo"
+          src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623948/A_highly_realistic_photo_of_202605011047_qdyr5v.jpg"
+          alt="Лікар">
+        <div class="doctor-overlay"><span class="doctor-overlay-btn">Детальніше</span></div>
+      </div>
+      <div class="doctor-name">Олена Ковальчук</div>
+      <div class="doctor-role">Естетична стоматологія</div>
+      <div class="doctor-exp">12 років досвіду</div>
+    </div>
+    <div class="doctor-card">
+      <div class="doctor-photo-wrap">
+        <img class="doctor-photo"
+          src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623947/A_highly_realistic_photo_of_202605011045_1_ntgd5u.jpg"
+          alt="Лікар">
+        <div class="doctor-overlay"><span class="doctor-overlay-btn">Детальніше</span></div>
+      </div>
+      <div class="doctor-name">Максим Бондар</div>
+      <div class="doctor-role">Ортодонтія</div>
+      <div class="doctor-exp">9 років досвіду</div>
+    </div>
+    <div class="doctor-card">
+      <div class="doctor-photo-wrap">
+        <img class="doctor-photo"
+          src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623948/A_highly_realistic_photo_of_202605011045_r9htyy.jpg"
+          alt="Лікар">
+        <div class="doctor-overlay"><span class="doctor-overlay-btn">Детальніше</span></div>
+      </div>
+      <div class="doctor-name">Тетяна Мороз</div>
+      <div class="doctor-role">Імплантологія</div>
+      <div class="doctor-exp">15 років досвіду</div>
+    </div>
+    <div class="doctor-card">
+      <div class="doctor-photo-wrap">
+        <img class="doctor-photo"
+          src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623948/A_highly_realistic_photo_of_202605011047_1_y4yjng.jpg"
+          alt="Лікар">
+        <div class="doctor-overlay"><span class="doctor-overlay-btn">Детальніше</span></div>
+      </div>
+      <div class="doctor-name">Андрій Лисенко</div>
+      <div class="doctor-role">Дитяча стоматологія</div>
+      <div class="doctor-exp">7 років досвіду</div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="reviews-header">
+    <div>
+      <p class="section-tag" style="color: var(--blue-light);">
+        <span style="display:inline-block;width:24px;height:1px;background:var(--blue-light);margin-right:8px;vertical-align:middle;"></span>
+        Відгуки
+      </p>
+      <h2 class="section-title" style="color:var(--white); margin-bottom:0;">Що кажуть<br>наші пацієнти</h2>
+    </div>
+    <div class="reviews-rating">
+      <div class="rating-num">4.9</div>
+      <div class="rating-stars">★★★★★</div>
+      <div class="rating-count">із 380 відгуків · Google Maps</div>
+    </div>
+  </div>
+  <div class="reviews-grid reveal">
+    <div class="review-card">
+      <div class="review-quote">"</div>
+      <p class="review-text">Прийшла зі страхом, пішла із посмішкою. Олена пояснила кожен крок, і я навіть не відчула болю. Вініри виглядають абсолютно природно — саме про такий результат я мріяла.</p>
+      <div class="review-author">
+        <div class="review-avatar">
+          <img src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623945/%D0%B2%D1%96%D0%B4%D0%B3%D1%83%D0%BA_%D0%B62_m6y3qa.jpg" alt="">
+        </div>
+        <div>
+          <div class="review-name">Марія Петренко</div>
+          <div class="review-service">Вініри · Естетика посмішки</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-quote">"</div>
+      <p class="review-text">Носив елайнери 7 місяців. Результат неймовірний — ніхто навіть не здогадувався про лікування. Команда Cleva завжди на зв'язку, відповідали навіть у вихідні.</p>
+      <div class="review-author">
+        <div class="review-avatar">
+          <img src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623945/%D0%B2%D1%96%D0%B4%D0%B3%D1%83%D0%BA_%D1%87_q5gcqy.jpg" alt="">
+        </div>
+        <div>
+          <div class="review-name">Олексій Дорошенко</div>
+          <div class="review-service">Clear aligners · Ортодонтія</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="review-quote">"</div>
+      <p class="review-text">Нарешті знайшла свого стоматолога. Клініка виглядає як дорогий готель, але без зарозумілості. Тетяна провела складну імплантацію — зараз навіть не пам'ятаю де стояв протез.</p>
+      <div class="review-author">
+        <div class="review-avatar">
+          <img src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623945/%D0%B2%D1%96%D0%B4%D0%B3%D1%83%D0%BA_%D0%B61_rfv6f0.jpg" alt="">
+        </div>
+        <div>
+          <div class="review-name">Наталія Савченко</div>
+          <div class="review-service">Straumann імплант</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-img-side">
+    <img
+      src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623944/%D0%B0%D0%B4%D0%BC%D1%96%D0%BD_tditk5.jpg"
+      alt="Cleva Dental Studio"
+      style="width:100%; height:100%; object-fit:cover; display:block;">
+  </div>
+  <div class="contact-right">
+    <p class="section-tag">Запис</p>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Ім'я</label>
+        <input class="form-input" type="text" placeholder="Ваше ім'я">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Телефон</label>
+        <input class="form-input" type="tel" placeholder="+38 0__  ___ __ __">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Послуга</label>
+      <select class="form-select">
+        <option value="">Оберіть послугу</option>
+        <option>Консультація</option>
+        <option>Естетика посмішки / вініри</option>
+        <option>Ортодонтія / елайнери</option>
+        <option>Імплантація</option>
+        <option>Профілактика / гігієна</option>
+        <option>Хірургія</option>
+        <option>Дитяча стоматологія</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Зручний час</label>
+      <input class="form-input" type="text" placeholder="Наприклад: вівторок після 17:00">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Коментар</label>
+      <textarea class="form-textarea" placeholder="Розкажіть про ваш запит або питання..."></textarea>
+    </div>
+    <button class="form-submit">Надіслати заявку</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <span class="footer-logo">Cleva <span>Dental</span></span>
+      <p class="footer-desc">Авторська стоматологічна студія. Де медицина зустрічається з мистецтвом посмішки.</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Клініка</p>
+      <ul class="footer-links">
+        <li><a href="#about">Про нас</a></li>
+        <li><a href="#team">Наша команда</a></li>
+        <li><a href="#cases">Результати</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Послуги</p>
+      <ul class="footer-links">
+        <li><a href="#">Естетика</a></li>
+        <li><a href="#">Ортодонтія</a></li>
+        <li><a href="#">Імплантація</a></li>
+        <li><a href="#">Профілактика</a></li>
+        <li><a href="#">Хірургія</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Контакти</p>
+      <ul class="footer-links">
+        <li><a href="#">вул. Хрещатик, 12</a></li>
+        <li><a href="tel:+380501234567">+38 050 123 45 67</a></li>
+        <li><a href="mailto:hello@clevadental.ua">hello@clevadental.ua</a></li>
+        <li><a href="#">Пн–Пт: 9:00–20:00</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Cleva Dental Studio. Всі права захищені.</p>
+    <p>Політика конфіденційності · Умови використання</p>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() { mobileMenu.classList.remove('open'); }
+
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+<script>
+  AOS.init();
+</script>
+</body>
+</html>
