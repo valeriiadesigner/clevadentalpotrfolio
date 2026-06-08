@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cleva Dental Studio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
@@ -27,7 +27,7 @@
     --text-light: #8A9BB0;
     --white: #FFFFFF;
     --font-display: 'Cormorant Garamond', serif;
-    --font-body: 'DM Sans', sans-serif;
+    --font-body: 'Nunito', sans-serif;
   }
 
   html { scroll-behavior: smooth; }
@@ -283,114 +283,257 @@
 
   /* ─── ABOUT / NUMBERS ─── */
   .about-section {
-    background: var(--navy);
+    position: relative;
     color: var(--white);
-    padding: 100px 5%;
-  }
-  .about-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
+    padding: 0;
+    overflow: hidden;
+    min-height: 620px;
+    display: flex;
+    align-items: stretch;
   }
 
-  .about-img-wrap {
-    position: relative;
+  /* фото — рівно ліва половина */
+  .about-photo {
+    position: absolute;
+    top: 0; left: 0;
+    width: 52%;
+    height: 100%;
+    z-index: 0;
   }
-  .about-img {
-    width: 100%; aspect-ratio: 4/5;
-    object-fit: cover; border-radius: 8px;
+  .about-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
     display: block;
   }
-  .about-img-accent {
-    position: absolute;
-    top: -20px; right: -20px;
-    width: 120px; height: 120px;
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 8px;
-    pointer-events: none;
+
+  /* права панель: темно-синій фон, трохи заходить на фото — ефект "зверху" */
+  .about-panel {
+    position: relative;
+    z-index: 2;
+    margin-left: 46%;           /* починається на 46% — перекриває фото на 6% */
+    width: 54%;
+    background: var(--navy);
+    padding: 80px 5% 80px 6%;
+    display: flex;
+    align-items: center;
+    /* тінь ліворуч — падає на фото */
+    box-shadow: -32px 0 64px rgba(14, 42, 71, 0.55),
+                -4px  0 16px rgba(14, 42, 71, 0.35);
+  }
+
+  .about-content {
+    width: 100%;
   }
 
   .about-content .section-tag { color: var(--blue-light); }
   .about-content .section-tag::before { background: var(--blue-light); }
   .about-content .section-title { color: var(--white); }
-  .about-content .section-sub { color: rgba(255,255,255,0.65); margin-bottom: 48px; }
+  .about-content .section-sub { color: rgba(255,255,255,0.68); margin-bottom: 40px; }
 
+  /* сітка карток */
   .about-nums {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 8px;
-    overflow: hidden;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 12px;
   }
+
+  /* декоративний зуб між колонками */
+  .about-tooth {
+    position: absolute;
+    right: calc(50% - 56px);
+    top: 50%;
+    transform: translateY(-58%) rotate(-18deg);
+    width: 112px;
+    z-index: 3;
+    pointer-events: none;
+    filter: drop-shadow(0 12px 28px rgba(14,42,71,0.28));
+    mix-blend-mode: screen;
+  }
+
+  /* скляна картка — базовий стиль */
   .about-num-item {
+    border-radius: 16px;
     padding: 28px 24px;
-    background: rgba(255,255,255,0.04);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 150px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.12);
+    transition: background 0.3s;
   }
+
+  .about-num-item.filled-dark {
+    background: rgba(46, 123, 196, 0.30);
+  }
+  .about-num-item.filled-dark:hover { background: rgba(46, 123, 196, 0.44); }
+
+  .about-num-item.filled-light {
+    background: rgba(214, 232, 247, 0.14);
+  }
+  .about-num-item.filled-light:hover { background: rgba(214, 232, 247, 0.24); }
+
+  .about-num-item.plain {
+    background: rgba(255,255,255,0.07);
+    padding-left: 28px;
+    justify-content: center;
+  }
+  .about-num-item.plain:hover { background: rgba(255,255,255,0.13); }
+
   .about-num-val {
-    font-family: var(--font-display);
-    font-size: 44px; font-weight: 300;
-    color: var(--white); line-height: 1;
-    margin-bottom: 6px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 48px; font-weight: 700;
+    line-height: 1;
+    margin-bottom: 8px;
+    color: var(--white);
   }
-  .about-num-val sup { font-size: 22px; vertical-align: super; }
-  .about-num-desc { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+  .about-num-val sup { font-size: 24px; vertical-align: super; font-weight: 700; }
+
+  .about-num-desc {
+    font-size: 12px; line-height: 1.5;
+    color: rgba(255,255,255,0.65);
+  }
+  .about-num-item.plain .about-num-desc { font-size: 13px; margin-top: 4px; }
 
   /* ─── SERVICES ─── */
-  .services-section { background: var(--off-white); }
+  .services-section { background: #f5f5f5; }
   .services-header {
     display: grid; grid-template-columns: 1fr 1fr;
     gap: 40px; align-items: end;
-    margin-bottom: 60px;
+    margin-bottom: 48px;
   }
-  .services-header .btn-ghost { color: var(--navy); }
 
   .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
+    gap: 16px;
   }
+
+  /* Base card — no photo */
   .service-card {
-    background: var(--white);
-    padding: 36px 32px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px 28px 24px;
     cursor: pointer;
-    transition: background 0.25s;
+    transition: box-shadow 0.25s, transform 0.2s;
     position: relative;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
   }
-  .service-card:hover { background: var(--navy); }
-  .service-card:hover .service-num { color: rgba(255,255,255,0.2); }
-  .service-card:hover .service-name { color: var(--white); }
-  .service-card:hover .service-desc { color: rgba(255,255,255,0.6); }
-  .service-card:hover .service-arrow { color: var(--white); border-color: rgba(255,255,255,0.3); }
+  .service-card:hover {
+    box-shadow: 0 8px 32px rgba(14,42,71,0.12);
+    transform: translateY(-3px);
+  }
 
-  .service-num {
-    font-family: var(--font-display);
-    font-size: 13px; color: var(--warm-gray);
-    margin-bottom: 40px;
-    transition: color 0.25s;
+  /* Card with photo */
+  .service-card.has-photo {
+    padding: 0;
+    min-height: 220px;
   }
+  .service-card.has-photo .sc-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .service-card.has-photo:hover .sc-img {
+    transform: scale(1.04);
+  }
+  .service-card.has-photo .sc-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(160deg, rgba(14,42,71,0.28) 0%, rgba(14,42,71,0.62) 100%);
+    border-radius: 16px;
+    z-index: 1;
+  }
+  .service-card.has-photo .sc-body {
+    position: relative; z-index: 2;
+    padding: 24px 24px 20px;
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  .service-card.has-photo .service-name { color: #ffffff; }
+  .service-card.has-photo .service-desc { color: rgba(255,255,255,0.8); }
+  .service-card.has-photo .service-price { color: rgba(255,255,255,0.9); }
+  .service-card.has-photo .service-arrow {
+    background: rgba(255,255,255,0.18);
+    border-color: rgba(255,255,255,0.35);
+    color: #ffffff;
+    backdrop-filter: blur(6px);
+  }
+  .service-card.has-photo:hover .service-arrow {
+    background: rgba(255,255,255,0.3);
+  }
+
+  /* Card body for plain cards */
+  .sc-body {
+    display: flex; flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    gap: 12px;
+  }
+
   .service-name {
-    font-family: var(--font-display);
-    font-size: 24px; font-weight: 400; line-height: 1.2;
-    color: var(--navy); margin-bottom: 12px;
-    transition: color 0.25s;
+    font-family: var(--font-body);
+    font-size: 17px; font-weight: 600; line-height: 1.3;
+    color: rgb(14, 42, 71);
+    margin-bottom: 8px;
   }
   .service-desc {
     font-size: 13px; line-height: 1.6;
-    color: var(--text-mid); margin-bottom: 32px;
-    transition: color 0.25s;
+    color: var(--text-mid);
+    flex: 1;
+  }
+  .service-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 16px;
+  }
+  .service-price {
+    font-size: 13px; font-weight: 500;
+    color: var(--text-mid);
   }
   .service-arrow {
     display: inline-flex; align-items: center; justify-content: center;
     width: 36px; height: 36px;
     border: 1px solid var(--warm-gray);
     border-radius: 50%;
-    color: var(--navy);
-    font-size: 14px;
-    transition: color 0.25s, border-color 0.25s, transform 0.2s;
+    background: #f5f5f5;
+    color: rgb(14, 42, 71);
+    font-size: 15px;
+    flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
   }
-  .service-card:hover .service-arrow { transform: translate(2px, -2px); }
+  .service-card:not(.has-photo):hover .service-arrow {
+    background: rgb(14, 42, 71);
+    border-color: rgb(14, 42, 71);
+    color: #fff;
+    transform: translate(2px, -2px);
+  }
+
+  /* Large featured card spans 2 columns */
+  .service-card.featured {
+    grid-column: span 2;
+    min-height: 240px;
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .service-card.featured { grid-column: span 1; }
+    .services-header { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card.featured { grid-column: span 1; }
+  }
 
   /* ─── HOW IT WORKS ─── */
   .how-section {
@@ -565,61 +708,106 @@
 
   /* ─── REVIEWS ─── */
   .reviews-section {
-    background: var(--navy);
-    color: var(--white);
+    background: #ffffff;
+    padding: 100px 5%;
   }
   .reviews-header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 48px; flex-wrap: wrap; gap: 20px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+    gap: 0 40px;
+    margin-bottom: 48px;
   }
-  .reviews-header .section-title { color: var(--white); margin-bottom: 0; }
+  .reviews-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-light);
+    padding-top: 8px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .reviews-label::before {
+    content: ''; width: 24px; height: 1px; background: var(--text-light);
+  }
+  .reviews-headline {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4.5vw, 60px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--navy);
+    margin: 0;
+  }
+  .reviews-headline em {
+    font-style: italic;
+    color: var(--blue-mid);
+  }
   .reviews-rating {
-    text-align: right;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 4px;
+    padding-top: 4px;
   }
   .rating-num {
     font-family: var(--font-display);
-    font-size: 48px; font-weight: 300; color: var(--white);
-    line-height: 1; margin-bottom: 4px;
+    font-size: 40px; font-weight: 300;
+    color: var(--text-dark); line-height: 1;
   }
   .rating-stars { color: #F5C842; font-size: 14px; letter-spacing: 2px; }
-  .rating-count { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  .rating-count { font-size: 11px; color: var(--text-light); }
 
   .reviews-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 1.1fr;
     gap: 16px;
+    align-items: stretch;
   }
   .review-card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 8px;
-    padding: 28px;
+    background: rgb(238, 245, 252);
+    border-radius: 20px;
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
   }
-  .review-quote {
-    font-family: var(--font-display);
-    font-size: 38px; color: var(--blue-mid);
-    line-height: 1; margin-bottom: 12px;
-  }
-  .review-text {
-    font-size: 14px; line-height: 1.7;
-    color: rgba(255,255,255,0.75);
-    margin-bottom: 24px;
-    font-style: italic;
-    font-family: var(--font-display);
+  .review-card::after {
+    content: '';
+    position: absolute;
+    bottom: -28px; right: -28px;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: rgba(14, 42, 71, 0.07);
+    pointer-events: none;
   }
   .review-author {
     display: flex; align-items: center; gap: 12px;
+    margin-bottom: 20px;
   }
   .review-avatar {
-    width: 36px; height: 36px; border-radius: 50%;
-    background: var(--blue-mid);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 500; color: var(--white);
-    flex-shrink: 0;
-    overflow: hidden;
+    width: 48px; height: 48px; border-radius: 50%;
+    overflow: hidden; flex-shrink: 0;
+    background: var(--blue-light);
   }
   .review-avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .review-name { font-size: 13px; font-weight: 500; color: var(--white); }
-  .review-service { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+  .review-name {
+    font-size: 14px; font-weight: 600;
+    color: var(--text-dark);
+  }
+  .review-service { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+  .review-text {
+    font-size: 14px; line-height: 1.7;
+    color: var(--text-mid);
+    flex: 1;
+  }
+  .review-card.photo-card {
+    padding: 0;
+    background: none;
+  }
+  .review-card.photo-card::after { display: none; }
+  .review-card.photo-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+    min-height: 320px;
+  }
 
   /* ─── BLOG ─── */
   .blog-section { background: var(--off-white); }
@@ -852,8 +1040,9 @@
     .hero-actions { justify-content: flex-start; }
     .hero-card-float { left: 5%; bottom: auto; top: 120px; }
 
-    .about-inner { grid-template-columns: 1fr; gap: 48px; }
-    .about-img { aspect-ratio: 16/9; }
+    .about-section { flex-direction: column; }
+    .about-photo { width: 100%; height: 340px; position: relative; }
+    .about-panel { margin-left: 0; width: 100%; box-shadow: 0 -16px 48px rgba(14,42,71,0.5); }
 
     .services-header { grid-template-columns: 1fr; }
     .services-grid { grid-template-columns: repeat(2, 1fr); }
@@ -866,8 +1055,11 @@
     .team-grid { grid-template-columns: repeat(2, 1fr); }
     .cases-grid { grid-template-columns: repeat(2, 1fr); }
 
-    .blog-grid { grid-template-columns: 1fr 1fr; }
-    .blog-card.featured { grid-column: span 2; }
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+    .review-card.photo-card { grid-column: span 2; }
+    .review-card.photo-card img { min-height: 260px; }
+    .reviews-header { grid-template-columns: auto 1fr; gap: 0 24px; }
+    .reviews-rating { grid-column: 1 / -1; flex-direction: row; align-items: center; gap: 16px; }
 
     .contact-section { grid-template-columns: 1fr; }
     .contact-img-side { min-height: 300px; }
@@ -895,8 +1087,9 @@
     .team-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
 
     .reviews-grid { grid-template-columns: 1fr; }
-    .reviews-header { flex-direction: column; align-items: flex-start; }
-    .reviews-rating { text-align: left; }
+    .review-card.photo-card { grid-column: span 1; }
+    .reviews-header { grid-template-columns: 1fr; gap: 12px 0; }
+    .reviews-rating { flex-direction: row; align-items: center; gap: 16px; }
 
     .blog-grid { grid-template-columns: 1fr; }
     .blog-card.featured { grid-column: span 1; }
@@ -942,7 +1135,7 @@
   <!-- background image -->
   <div class="hero-bg">
     <video class="hero-video" autoplay muted loop playsinline>
-      <source src="https://res.cloudinary.com/dsleguyqt/video/upload/q_auto/f_auto/v1777379536/Hero_section_igh74r.mp4"
+      <source src="https://res.cloudinary.com/dsleguyqt/video/upload/q_auto/f_auto/v1778572526/hero_section_hviups.mp4"
         type="video/mp4">
     </video>
   </div>
@@ -975,84 +1168,144 @@
     <div>
       <p class="section-tag">Послуги</p>
       <h2 class="section-title">Що ми<em> робимо</em></h2>
-    </div>
-    <div>
       <p class="section-sub">Повний спектр стоматологічних послуг — від профілактики до складних реставрацій.</p>
     </div>
   </div>
-  <div class="services-grid reveal">
+
+  <div class="services-grid">
+
+    <!-- 1: Естетика — plain, featured (wide) -->
     <div class="service-card">
-      <div class="service-num">01</div>
-      <div class="service-name">Естетика<br>посмішки</div>
-      <div class="service-desc">Вініри, відбілювання, реставрація. Результат, що виглядає природно і відчувається як ваш власний.</div>
-      <div class="service-arrow">↗</div>
+      <div class="sc-body">
+        <div>
+          <div class="service-name">Естетика посмішки</div>
+          <div class="service-desc">Вініри, відбілювання, реставрація. Результат, що виглядає природно і відчувається як ваш власний.</div>
+        </div>
+        <div class="service-footer">
+          <span class="service-price">від 2 000 грн</span>
+          <span class="service-arrow">↗</span>
+        </div>
+      </div>
     </div>
+
+    <!-- 2: Ортодонтія — photo card -->
+    <div class="service-card has-photo">
+      <img class="sc-img"
+        src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1779694489/%D0%A0%D0%B5%D0%B0%D0%BB%D1%96%D1%81%D1%82%D0%B8%D1%87%D0%BD%D0%B5_%D1%84%D0%BE%D1%82%D0%BE_%D0%BF%D1%80%D0%BE%D0%B7%D0%BE%D1%80%D0%B8%D1%85_%D0%B5%D0%BB%D0%B0%D0%B8%CC%86%D0%BD%D0%B5%D1%80%D1%96%D0%B2_%D0%BA%D1%80%D1%83%D0%BF%D0%BD%D0%B8%D0%BC_202605251021_hujg2v.jpg"
+        alt="Ортодонтія">
+      <div class="sc-overlay"></div>
+      <div class="sc-body">
+        <div class="service-name">Ортодонтія</div>
+        <div class="service-footer">
+          <span class="service-price">від 4 500 грн</span>
+          <span class="service-arrow">↗</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3: Хірургія — plain -->
     <div class="service-card">
-      <div class="service-num">02</div>
-      <div class="service-name">Ортодонтія</div>
-      <div class="service-desc">Прозорі елайнери і брекети нового покоління. Рівні зуби без компромісів зі стилем.</div>
-      <div class="service-arrow">↗</div>
+      <div class="sc-body">
+        <div>
+          <div class="service-name">Хірургія</div>
+          <div class="service-desc">Видалення зубів, синус-ліфтинг, кісткова пластика — у комфортних умовах під седацією.</div>
+        </div>
+        <div class="service-footer">
+          <span class="service-price">від 1 300 грн</span>
+          <span class="service-arrow">↗</span>
+        </div>
+      </div>
     </div>
+
+    <!-- 4: Профілактика — photo card -->
+    <div class="service-card has-photo">
+      <img class="sc-img"
+        src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1779694486/%D0%A0%D0%B5%D0%B0%D0%BB%D1%96%D1%81%D1%82%D0%B8%D1%87%D0%BD%D0%B5_%D1%84%D0%BE%D1%82%D0%BE_%D1%81%D1%83%D1%87%D0%B0%D1%81%D0%BD%D0%BE%D0%B3%D0%BE_%D0%BA%D0%B0%D0%B1%D1%96%D0%BD%D0%B5%D1%82%D1%83_%D1%81%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D1%96%D1%87%D0%BD%D0%BE%D1%96%CC%88_202605251027_shzslb.jpg"
+        alt="Профілактика">
+      <div class="sc-overlay"></div>
+      <div class="sc-body">
+        <div class="service-name">Профілактика</div>
+        <div class="service-footer">
+          <span class="service-price">від 4 500 грн</span>
+          <span class="service-arrow">↗</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5: Імплантація — plain -->
     <div class="service-card">
-      <div class="service-num">03</div>
-      <div class="service-name">Імплантація</div>
-      <div class="service-desc">Повне відновлення зуба під корінь. Імпланти швейцарської якості, що слугують десятиліттями.</div>
-      <div class="service-arrow">↗</div>
+      <div class="sc-body">
+        <div>
+          <div class="service-name">Імплантація</div>
+          <div class="service-desc">Повне відновлення зуба під корінь. Імпланти швейцарської якості, що слугують десятиліттями.</div>
+        </div>
+        <div class="service-footer">
+          <span class="service-price">від 2 700 грн</span>
+          <span class="service-arrow">↗</span>
+        </div>
+      </div>
     </div>
-    <div class="service-card">
-      <div class="service-num">04</div>
-      <div class="service-name">Профілактика</div>
-      <div class="service-desc">Гігієна, Air Flow, огляд. Двічі на рік — і зуби скажуть дякую через 20 років.</div>
-      <div class="service-arrow">↗</div>
+
+    <!-- 6: Дитяча стоматологія — photo card -->
+    <div class="service-card has-photo">
+      <img class="sc-img"
+        src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1779694485/%D0%A0%D0%B5%D0%B0%D0%BB%D1%96%D1%81%D1%82%D0%B8%D1%87%D0%BD%D0%B5_%D1%84%D0%BE%D1%82%D0%BE_%D1%81%D1%83%D1%87%D0%B0%D1%81%D0%BD%D0%BE%D0%B3%D0%BE_%D0%BA%D0%B0%D0%B1%D1%96%D0%BD%D0%B5%D1%82%D1%83_%D1%81%D1%82%D0%BE%D0%BC%D0%B0%D1%82%D0%BE%D0%BB%D0%BE%D0%B3%D1%96%D1%87%D0%BD%D0%BE%D1%96%CC%88_202605251018_rtkqg5.jpg"
+        alt="Дитяча стоматологія">
+      <div class="sc-overlay"></div>
+      <div class="sc-body">
+        <div class="service-name">Дитяча стоматологія</div>
+        <div class="service-footer">
+          <span class="service-price">від 2 000 грн</span>
+          <span class="service-arrow">↗</span>
+        </div>
+      </div>
     </div>
-    <div class="service-card">
-      <div class="service-num">05</div>
-      <div class="service-name">Хірургія</div>
-      <div class="service-desc">Видалення зубів, синус-ліфтинг, кісткова пластика — у комфортних умовах під седацією.</div>
-      <div class="service-arrow">↗</div>
-    </div>
-    <div class="service-card">
-      <div class="service-num">06</div>
-      <div class="service-name">Дитяча<br>стоматологія</div>
-      <div class="service-desc">Лагідний підхід до маленьких пацієнтів. Формуємо правильне ставлення до стоматолога змалку.</div>
-      <div class="service-arrow">↗</div>
-    </div>
+
   </div>
 </section>
 
 <!-- ABOUT -->
 <section class="about-section" id="about">
-  <div class="about-inner">
-    <div class="about-img-wrap reveal">
-      <img class="about-img"
-        src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623947/%D0%BA%D0%B0%D0%B1%D1%96%D0%BD%D0%B5%D1%82_wdtbbw.jpg"
-        alt="Cleva Dental — інтер'єр клініки">
-      <div class="about-img-accent"></div>
-    </div>
+
+  <!-- фото — ліва половина -->
+  <div class="about-photo">
+    <img
+      src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623947/%D0%BA%D0%B0%D0%B1%D1%96%D0%BD%D0%B5%D1%82_wdtbbw.jpg"
+      alt="Cleva Dental — інтер'єр клініки">
+  </div>
+
+  <!-- права панель: темно-синій, нависає над фото з тінню -->
+  <div class="about-panel">
     <div class="about-content">
       <p class="section-tag">Про нас</p>
       <h2 class="section-title">Більше, ніж<br>стоматологія</h2>
       <p class="section-sub">Ми не просто лікуємо зуби — ми проектуємо посмішки. Cleva Dental Studio — це місце, де кожен пацієнт отримує власний маршрут: від діагностики до довгострокового результату.</p>
+
       <div class="about-nums reveal reveal-delay-1">
-        <div class="about-num-item">
+        <div class="about-num-item filled-dark">
           <div class="about-num-val">8<sup>+</sup></div>
           <div class="about-num-desc">Років на ринку<br>естетичної стоматології</div>
         </div>
-        <div class="about-num-item">
+
+        <div class="about-num-item plain">
           <div class="about-num-val">12</div>
           <div class="about-num-desc">Лікарів різних<br>спеціалізацій</div>
         </div>
-        <div class="about-num-item">
+
+        <div class="about-num-item filled-light">
           <div class="about-num-val">4к<sup>+</sup></div>
           <div class="about-num-desc">Задоволених<br>пацієнтів</div>
         </div>
-        <div class="about-num-item">
+
+        <div class="about-num-item plain">
           <div class="about-num-val">97<sup>%</sup></div>
           <div class="about-num-desc">Позитивних<br>відгуків</div>
         </div>
+
       </div>
     </div>
   </div>
+
 </section>
 
 <!-- HOW IT WORKS -->
@@ -1218,11 +1471,8 @@
 <section class="reviews-section" id="reviews">
   <div class="reviews-header">
     <div>
-      <p class="section-tag" style="color: var(--blue-light);">
-        <span style="display:inline-block;width:24px;height:1px;background:var(--blue-light);margin-right:8px;vertical-align:middle;"></span>
-        Відгуки
-      </p>
-      <h2 class="section-title" style="color:var(--white); margin-bottom:0;">Що кажуть<br>наші пацієнти</h2>
+      <p class="section-tag">Відгуки</p>
+      <h2 class="section-title" style="margin-bottom:0;">Що <em>кажуть</em><br>наші пацієнти</h2>
     </div>
     <div class="reviews-rating">
       <div class="rating-num">4.9</div>
@@ -1230,46 +1480,53 @@
       <div class="rating-count">із 380 відгуків · Google Maps</div>
     </div>
   </div>
+
   <div class="reviews-grid reveal">
+
     <div class="review-card">
-      <div class="review-quote">"</div>
-      <p class="review-text">Прийшла зі страхом, пішла із посмішкою. Олена пояснила кожен крок, і я навіть не відчула болю. Вініри виглядають абсолютно природно — саме про такий результат я мріяла.</p>
       <div class="review-author">
         <div class="review-avatar">
-          <img src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623945/%D0%B2%D1%96%D0%B4%D0%B3%D1%83%D0%BA_%D0%B62_m6y3qa.jpg" alt="">
+          <img src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623945/%D0%B2%D1%96%D0%B4%D0%B3%D1%83%D0%BA_%D0%B62_m6y3qa.jpg" alt="Марія">
         </div>
         <div>
           <div class="review-name">Марія Петренко</div>
           <div class="review-service">Вініри · Естетика посмішки</div>
         </div>
       </div>
+      <p class="review-text">Прийшла зі страхом, пішла із посмішкою. Олена пояснила кожен крок, і я навіть не відчула болю. Вініри виглядають абсолютно природно — саме про такий результат я мріяла.</p>
     </div>
+
     <div class="review-card">
-      <div class="review-quote">"</div>
-      <p class="review-text">Носив елайнери 7 місяців. Результат неймовірний — ніхто навіть не здогадувався про лікування. Команда Cleva завжди на зв'язку, відповідали навіть у вихідні.</p>
       <div class="review-author">
         <div class="review-avatar">
-          <img src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623945/%D0%B2%D1%96%D0%B4%D0%B3%D1%83%D0%BA_%D1%87_q5gcqy.jpg" alt="">
+          <img src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623945/%D0%B2%D1%96%D0%B4%D0%B3%D1%83%D0%BA_%D1%87_q5gcqy.jpg" alt="Олексій">
         </div>
         <div>
           <div class="review-name">Олексій Дорошенко</div>
           <div class="review-service">Clear aligners · Ортодонтія</div>
         </div>
       </div>
+      <p class="review-text">Носив елайнери 7 місяців. Результат неймовірний — ніхто навіть не здогадувався про лікування. Команда Cleva завжди на зв'язку, відповідали навіть у вихідні.</p>
     </div>
+
     <div class="review-card">
-      <div class="review-quote">"</div>
-      <p class="review-text">Нарешті знайшла свого стоматолога. Клініка виглядає як дорогий готель, але без зарозумілості. Тетяна провела складну імплантацію — зараз навіть не пам'ятаю де стояв протез.</p>
       <div class="review-author">
         <div class="review-avatar">
-          <img src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623945/%D0%B2%D1%96%D0%B4%D0%B3%D1%83%D0%BA_%D0%B61_rfv6f0.jpg" alt="">
+          <img src="https://res.cloudinary.com/dsleguyqt/image/upload/q_auto/f_auto/v1777623945/%D0%B2%D1%96%D0%B4%D0%B3%D1%83%D0%BA_%D0%B61_rfv6f0.jpg" alt="Наталія">
         </div>
         <div>
           <div class="review-name">Наталія Савченко</div>
           <div class="review-service">Straumann імплант</div>
         </div>
       </div>
+      <p class="review-text">Нарешті знайшла свого стоматолога. Клініка виглядає як дорогий готель, але без зарозумілості. Тетяна провела складну імплантацію — зараз навіть не пам'ятаю де стояв протез.</p>
     </div>
+
+    <!-- photo card — 4th slot -->
+    <div class="review-card photo-card">
+      <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=600&auto=format&fit=crop&q=80" alt="Посмішка пацієнта">
+    </div>
+
   </div>
 </section>
 
